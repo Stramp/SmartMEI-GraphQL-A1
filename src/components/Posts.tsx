@@ -1,12 +1,8 @@
 import React from 'react';
 import Cards from './Cards';
-import styled from 'styled-components'
+import styled from 'styled-components';
+import Pagination from './Pagination';
 
-export interface Post {
-    title: string,
-    description: string,
-    id: string
-}
 
 
 
@@ -20,20 +16,24 @@ const SCards = styled.main`
     
 `;
 
-const Posts = ({ posts, loading }: any) => {
+const Posts = ({ posts, loading, postsPerPage, setPage }: any) => {
     if (loading) {
         return <h2>Loading...</h2>;
     }
 
     return (
-        <SCards>
-            {posts.map((post: any) => (
-                <Cards
-                    key={post.id}
-                    title={post.title}
-                    description={post.description} />
-            ))}
-        </SCards>
+        <>
+            <SCards>
+                {posts.slice(0, 10).map((post: any) => (
+                    <Cards
+                        key={post.id}
+                        title={post.title}
+                        description={post.description} />
+                ))}
+
+            </SCards>
+            <Pagination postsPerPage={postsPerPage} totalPosts={posts.length} paginate={setPage} />
+        </>
     );
 };
 

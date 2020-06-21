@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import Posts, { Post } from './Posts';
-import Pagination from './Pagination';
+import Posts from './Posts';
+
 
 
 const StyledMain = styled.main`
@@ -16,159 +16,157 @@ const StyledMain = styled.main`
     
 `;
 
-const arrPosts: Post[] = [
+const arrPosts = [
     {
         title: "tittulo1",
         description: "descrição1",
-        id: "4654564"
+        id: "46545123164"
     },
     {
         title: "tittulo2",
         description: "descrição2",
-        id: "876132"
+        id: "8768768132"
     },
     {
         title: "tittulo3",
         description: "descrição3",
-        id: "746518"
+        id: "7461231518"
     },
     {
         title: "tittulo4",
         description: "descrição4",
-        id: "74651458"
+        id: "746234251458"
     },
     {
         title: "tittulo2",
         description: "descrição2",
-        id: "876132"
+        id: "875234526132"
     },
     {
         title: "tittulo3",
         description: "descrição3",
-        id: "746518"
+        id: "7467868518"
     },
     {
         title: "tittulo4",
         description: "descrição4",
-        id: "74651458"
+        id: "7465145978978"
     },
     {
         title: "tittulo2",
         description: "descrição2",
-        id: "876132"
+        id: "34242"
     },
     {
         title: "tittulo3",
         description: "descrição3",
-        id: "746518"
+        id: "0980890"
     },
     {
         title: "tittulo4",
         description: "descrição4",
-        id: "74651458"
+        id: "12312"
     },
     {
         title: "tittulo2",
         description: "descrição2",
-        id: "876132"
+        id: "98709"
     },
     {
         title: "tittulo3",
         description: "descrição3",
-        id: "746518"
+        id: "5364563"
     },
     {
         title: "tittulo4",
         description: "descrição4",
-        id: "74651458"
+        id: "79595679"
     },
     {
         title: "tittulo2",
         description: "descrição2",
-        id: "876132"
+        id: "57996"
     },
     {
         title: "tittulo3",
         description: "descrição3",
-        id: "746518"
+        id: "6785"
     },
     {
         title: "tittulo4",
         description: "descrição4",
-        id: "74651458"
+        id: "99"
     },
     {
         title: "tittulo2",
         description: "descrição2",
-        id: "876132"
+        id: "9976"
     },
     {
         title: "tittulo3",
         description: "descrição3",
-        id: "746518"
+        id: "76876"
     },
     {
         title: "tittulo4",
         description: "descrição4",
-        id: "74651458"
+        id: "746587691458"
     },
     {
         title: "tittulo2",
         description: "descrição2",
-        id: "876132"
+        id: "2342"
     },
     {
         title: "tittulo3",
         description: "descrição3",
-        id: "746518"
+        id: "5345345"
     },
     {
         title: "tittulo4",
         description: "descrição4",
-        id: "74651458"
+        id: "7435"
     },
     {
         title: "tittulo2",
         description: "descrição2",
-        id: "876132"
+        id: "345"
     },
     {
         title: "tittulo3",
         description: "descrição3",
-        id: "746518"
+        id: "6547"
     },
     {
         title: "tittulo4",
         description: "descrição4",
-        id: "74651458"
+        id: "125"
     },
     {
         title: "tittulo2",
         description: "descrição2",
-        id: "876132"
+        id: "3232"
     },
     {
         title: "tittulo3",
         description: "descrição3",
-        id: "746518"
+        id: "7443436518"
     },
     {
         title: "tittulo4",
         description: "descrição4",
-        id: "74651458"
+        id: "1231231"
     }
 ]
 
 
-function paginar() {
-    console.log("Paginando")
-}
+
 
 const Main = () => (
     <StyledMain>
         <h1>Vagas</h1>
-        <Posts posts={arrPosts.slice(0, 10)} loading={false} />
-        <Pagination postsPerPage="10" totalPosts={arrPosts.length} paginate={paginar} />
+        <Posts posts={arrPosts} loading={false} postsPerPage="10" />
+
     </StyledMain>
 )
 
