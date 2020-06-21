@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Post } from './Posts'
 
 
 const SCards = styled.div`
@@ -20,12 +21,12 @@ const SCards = styled.div`
 
 
 
-const Cards = () => {
+const Cards = ({ title, description }: any) => {
 
     return (
         <SCards>
-            <h3>Card1</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut natus dolores quod commodi eligendi odio vitae recusandae ex veritatis esse ipsa soluta ullam iste exercitationem quibusdam, tempore quisquam enim asperiores.</p>
+            <h3>{title}</h3>
+            <p>{description}</p>
         </SCards>
     )
 }
