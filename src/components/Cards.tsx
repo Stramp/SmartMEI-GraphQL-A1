@@ -1,19 +1,23 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
 
-export interface Post {
+export interface TypePost {
     title: string,
     description: string,
     id: string,
-    tags: string,
-    companie: string
+    tags: [{ name: string }],
+    company: {
+        name: string
+    }
 }
 
 const Grow = keyframes`
 from{
-    transform: scale(0,0);
+    transform: scale(0.9,0.9);
+    opacity:0.3;
 }to{
     transform: scale(1,1);
+    opacity:1;
 }
 `;
 
@@ -31,8 +35,8 @@ const SCards: any = styled.div`
     transition: all 0.3s ease 0s;
     &&:hover{
         cursor:pointer;
-        box-shadow: 4px 5px 5px #777575;
-        transform:scale(1.05,1.05);
+        box-shadow: 6px 7px 5px #777575;
+     
         
     }
 `;
@@ -53,15 +57,16 @@ margin-bottom:10px;
 `;
 
 
-const Cards: React.FC<Post> = ({ title, description }) => {
+const Post: React.FC<TypePost> = ({ title, description, company, tags }) => {
+    console.log('>>>>>>>))))##', tags)
     return (
         <SCards>
             <SH3>{title}</SH3>
-            <SH5>{"Seleta Digital"}</SH5>
+            <SH5>{company.name}</SH5>
             <SP>{description.slice(0, 140)} ...<b>Read More</b></SP>
-            <code>#react #nodejs</code>
+            <code>{tags.map(tag => ' #' + tag.name.replace(' ', ''))}</code>
         </SCards>
     )
 }
 
-export default Cards;
+export default Post;

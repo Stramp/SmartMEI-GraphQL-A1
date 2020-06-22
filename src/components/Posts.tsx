@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import Cards, { Post } from './Cards';
+import Post, { TypePost } from './Cards';
 import styled from 'styled-components';
 import Pagination from './Pagination';
 
-export interface Posts {
-    posts: Post[]
+export interface TypePosts {
+    posts: TypePost[]
 }
 
 
@@ -21,7 +21,7 @@ const SCards = styled.section`
     
 `;
 
-const Posts: React.FC<Posts> = ({ posts }) => {
+const Posts: React.FC<TypePosts> = ({ posts }) => {
 
     const [currentPage, setCurrentPage] = useState(1);
     const [postsPerPage] = useState(10);
@@ -38,14 +38,14 @@ const Posts: React.FC<Posts> = ({ posts }) => {
     return (
         <>
             <SCards>
-                {currentPosts.map((post: Post) => (
-                    <Cards
-                        key={post.id}
-                        id={post.id}
-                        title={post.title}
-                        description={post.description}
-                        tags={post.tags}
-                        companie={post.companie} />
+                {currentPosts.map(({ id, title, description, tags, company }) => (
+                    <Post
+                        key={id}
+                        id={id}
+                        title={title}
+                        description={description}
+                        tags={tags}
+                        company={company} />
                 ))}
 
             </SCards>

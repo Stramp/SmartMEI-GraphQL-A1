@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { useQuery } from "@apollo/react-hooks";
 
-import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 
 import styled from 'styled-components';
 import Posts from './Posts';
-
 
 
 const StyledMain = styled.main`
@@ -13,7 +12,7 @@ const StyledMain = styled.main`
     max-width: 1100px;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content:space-between;
     height: 100%;
     flex-direction:column;
     margin:15px;
@@ -25,6 +24,9 @@ const AllPosts = gql`
 
         jobs{
             id title slug description 
+            company{
+              name
+            }
             tags{
             name
             }
@@ -34,12 +36,11 @@ const AllPosts = gql`
 
 
 
-const Main: React.FC<any> = (props) => {
-    const [posts, setPosts] = useState([]);
-    const loading = props.todosPosts.loading;
-    useEffect(() => {
-        setPosts(loading ? [] : props.todosPosts.jobs);
-    }, [loading]);
+const Main: React.FC = () => {
+    const { data, loading } = useQuery(AllPosts);
+    console.log(loading)
+    console.log(data)
+
 
 
     if (loading) {
@@ -49,9 +50,9 @@ const Main: React.FC<any> = (props) => {
     return (
         <StyledMain>
             <h1>Vagas</h1>
-            <Posts posts={posts} />
+            <Posts posts={data.jobs} />
         </StyledMain>
     )
 }
 
-export default graphql(AllPosts, { name: 'todosPosts' })(Main);
+export default Main;

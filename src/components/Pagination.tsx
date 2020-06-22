@@ -22,14 +22,20 @@ const SLi = styled.li`
 `;
 const SA = styled.a` 
 text-decoration:none;
-padding:3px;
-margin:2px;
+padding:5px 10px 5px 10px;
+margin:5px;
 box-shadow: 2px 3px 4px #777575;
-font-weight: 600;
 color: #000;
 border-bottom: solid 1px #000;
-font-size:1.3rem;
+font-size:1.4rem;
 background: ${props => Number(props.children) === Number(props.tabIndex) ? '#00000091' : null};
+transition: all 0.3s ease 0s;
+&&:hover{
+        cursor:pointer;
+        box-shadow: 6px 7px 5px #777575;
+        
+    }
+
 `;
 
 
