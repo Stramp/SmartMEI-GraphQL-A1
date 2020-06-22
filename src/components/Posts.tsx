@@ -48,7 +48,7 @@ const Posts: React.FC<Posts> = ({ posts }) => {
                 ))}
 
             </SCards>
-            <Pagination postsPerPage={postsPerPage} totalPosts={posts.length} setPage={paginar} />
+            <Pagination postsPerPage={postsPerPage} totalPosts={posts.length} setPage={paginar} currentPage={currentPage} />
         </>
     );
 };
