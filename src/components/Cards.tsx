@@ -1,10 +1,14 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
+import { useModal } from '../context/modalContext'
+
+
 
 export interface TypePost {
     title: string,
     description: string,
     id: string,
+    slug: string,
     tags: [{ name: string }],
     company: {
         name: string
@@ -13,10 +17,10 @@ export interface TypePost {
 
 const Grow = keyframes`
 from{
-    transform: scale(0.9,0.9);
+        transform: scale(0.9,0.9);
     opacity:0.3;
 }to{
-    transform: scale(1,1);
+        transform: scale(1,1);
     opacity:1;
 }
 `;
@@ -36,8 +40,8 @@ const SCards: any = styled.div`
     &&:hover{
         cursor:pointer;
         box-shadow: 6px 7px 5px #777575;
-     
-        
+
+
     }
 `;
 
@@ -57,15 +61,29 @@ margin-bottom:10px;
 `;
 
 
-const Post: React.FC<TypePost> = ({ title, description, company, tags }) => {
-    console.log('>>>>>>>))))##', tags)
+
+
+
+const Post: React.FC<TypePost> = ({ title, description, company, tags, slug }) => {
+    const { modalVisible, setModalVisible, setModalItem } = useModal();
+    console.log('>>>>>>>))))##', slug);
+
+    function handClick(post: {}) {
+        setModalVisible(!modalVisible);
+        setModalItem(post);
+        console.log('click:>', post)
+    }
+
     return (
-        <SCards>
-            <SH3>{title}</SH3>
-            <SH5>{company.name}</SH5>
-            <SP>{description.slice(0, 140)} ...<b>Read More</b></SP>
-            <code>{tags.map(tag => ' #' + tag.name.replace(' ', ''))}</code>
-        </SCards>
+        <>
+
+            <SCards onClick={() => handClick({ slug })}>
+                <SH3>{title}</SH3>
+                <SH5>{company.name}</SH5>
+                <SP>{description.slice(0, 140)} ...<b>Read More</b></SP>
+                <code>{tags.map(tag => ' #' + tag.name.replace(' ', ''))}</code>
+            </SCards>
+        </>
     )
 }
 

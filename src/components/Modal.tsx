@@ -1,9 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
+import { TypePost } from './Cards';
+import { useModal } from '../context/modalContext'
 
+interface TypeModal {
+    item: TypePost
+}
 
 const StyledModal = styled.div`
-  background: ${({ theme }) => theme.bgModalColor};
+  background: #000000d6;
   position:fixed;
   top: 0px;
   bottom: 0px;
@@ -14,7 +19,7 @@ const StyledModal = styled.div`
   z-index: 999;
 `
 const SBox = styled.div`
-    background: ${({ theme }) => theme.cardsBgTxtColor};
+    background:#fff;
     border: 2px solid ${({ theme }) => theme.borderColor};
     border-radius:5px;
     width: 75vw;
@@ -33,14 +38,24 @@ const SBox = styled.div`
 
 
 
-const Modal = () => (
-    <StyledModal>
-
-        <SBox>
-        </SBox>
 
 
-    </StyledModal>
-)
+const Modal: React.FC = () => {
+    const { modalVisible, setModalVisible, modalItem } = useModal();
+    console.log(">>> modal boo >", modalItem)
+    const ModalEstructure: React.FC = () => (
+        <StyledModal onClick={() => setModalVisible(!modalVisible)}>
+            < SBox >
+                {modalItem.slug}
+            </SBox >
+        </StyledModal >
+    )
+
+    return (
+        <>
+            {modalVisible ? <ModalEstructure /> : null}
+        </>
+    )
+}
 
 export default Modal;

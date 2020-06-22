@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import Post, { TypePost } from './Cards';
 import styled from 'styled-components';
 import Pagination from './Pagination';
+import Modal from './Modal';
+import ModalProvider from '../context/modalContext';
 
 export interface TypePosts {
     posts: TypePost[]
@@ -36,21 +38,23 @@ const Posts: React.FC<TypePosts> = ({ posts }) => {
 
 
     return (
-        <>
+        <ModalProvider>
+            <Modal />
             <SCards>
-                {currentPosts.map(({ id, title, description, tags, company }) => (
+                {currentPosts.map(({ id, title, description, tags, company, slug }) => (
                     <Post
                         key={id}
                         id={id}
                         title={title}
                         description={description}
                         tags={tags}
+                        slug={slug}
                         company={company} />
                 ))}
 
             </SCards>
             <Pagination postsPerPage={postsPerPage} totalPosts={posts.length} setPage={paginar} currentPage={currentPage} />
-        </>
+        </ModalProvider>
     );
 };
 
