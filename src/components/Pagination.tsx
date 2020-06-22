@@ -51,10 +51,10 @@ const Pagination: React.FC<Indice> = ({ postsPerPage, totalPosts, setPage, curre
 
 
 
-    console.log(">>>>>>", currentList, "<<<<<<<<")
+    console.log(">>>>>>", currentPage, "<<<<<<<<")
 
     function handDownPageInd() {
-        if (currentPage <= (indexOfFirstList + 2)) setPageInd(paginationInd - 1);
+        if (currentPage <= (indexOfFirstList + 2) && paginationInd >= 1) setPageInd(paginationInd - 1);
         setPage(currentPage - 1);
     }
     function handUpPageInd() {
@@ -65,7 +65,13 @@ const Pagination: React.FC<Indice> = ({ postsPerPage, totalPosts, setPage, curre
     return (
         <SNav>
             <SUl >
-                {paginationInd > 0 ? <SLi> <SA onClick={handDownPageInd} href='!#'>  {'<<'}... </SA> </SLi> : null}
+                {currentPage <= 1 ? null :
+                    <SLi>
+                        <SA onClick={handDownPageInd} href='!#'> {'<<'} </SA>
+                        {paginationInd > 0 ? <span>...</span> : null}
+                    </SLi>
+                }
+
                 {currentList.map(number => (
                     <SLi key={number} >
                         <SA onClick={(e) => setPage(number)} href='!#' tabIndex={currentPage} >
@@ -73,7 +79,15 @@ const Pagination: React.FC<Indice> = ({ postsPerPage, totalPosts, setPage, curre
                         </SA>
                     </SLi>
                 ))}
-                {pageNumbers.length >= indexOfLastList ? <SLi> <SA onClick={handUpPageInd} href='!#'> ...{'>>'} </SA> </SLi> : null}
+
+
+                {pageNumbers.length === currentPage ? null :
+                    <SLi>
+                        {pageNumbers.length >= indexOfLastList ? <span>...</span> : null}
+                        <SA onClick={handUpPageInd} href='!#'> {'>>'} </SA>
+                    </SLi>
+                }
+
             </SUl>
 
         </SNav>

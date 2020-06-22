@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import logo from '../assets/logo.svg';
-import svgColor from 'svg-color';
 
 
 
@@ -23,10 +22,9 @@ const SImg = styled.img`
 
 
 const Header = () => {
-    const svgNew = svgColor(logo, 'red');
     return (
         <StyledHeader>
-            <SImg src={svgNew} />
+            <SImg src={logo} />
         </StyledHeader>
     )
 }

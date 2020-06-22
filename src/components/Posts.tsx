@@ -4,8 +4,7 @@ import styled from 'styled-components';
 import Pagination from './Pagination';
 
 export interface Posts {
-    posts: Post[],
-
+    posts: Post[]
 }
 
 
@@ -44,7 +43,9 @@ const Posts: React.FC<Posts> = ({ posts }) => {
                         key={post.id}
                         id={post.id}
                         title={post.title}
-                        description={post.description} />
+                        description={post.description}
+                        tags={post.tags}
+                        companie={post.companie} />
                 ))}
 
             </SCards>

@@ -3,13 +3,15 @@ import { HttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 
 
-const httLink = new HttpLink({
-    uri: 'https://api.graphql.jobs/'
+const cache = new InMemoryCache();
+
+const link = new HttpLink({
+    uri: process.env.REACT_APP_GRAPHQL_URI
 });
 
 const aClient = new ApolloClient({
-    link: httLink,
-    cache: new InMemoryCache()
+    link,
+    cache
 });
 
 export default aClient;

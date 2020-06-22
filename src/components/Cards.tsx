@@ -4,7 +4,9 @@ import styled, { keyframes } from 'styled-components';
 export interface Post {
     title: string,
     description: string,
-    id: string
+    id: string,
+    tags: string,
+    companie: string
 }
 
 const Grow = keyframes`
@@ -35,13 +37,29 @@ const SCards: any = styled.div`
     }
 `;
 
+const SH3 = styled.h3`
+font-size:1.4rem;
+padding-left:10px;
+`;
+const SH5 = styled.h5`
+font-size:1.2rem;
+padding-left:10px;
+margin-bottom:5px;
+color:#afafaf;
+`;
+const SP = styled.p`
+font-size:1.2rem;
+margin-bottom:10px;
+`;
 
 
 const Cards: React.FC<Post> = ({ title, description }) => {
     return (
         <SCards>
-            <h3>{title}</h3>
-            <p>{description.slice(0, 140) + " ..."}</p>
+            <SH3>{title}</SH3>
+            <SH5>{"Seleta Digital"}</SH5>
+            <SP>{description.slice(0, 140)} ...<b>Read More</b></SP>
+            <code>#react #nodejs</code>
         </SCards>
     )
 }
