@@ -4,6 +4,7 @@ import styled from 'styled-components';
 export interface Indice {
     postsPerPage: number,
     totalPosts: number,
+    setPage: Function
 }
 
 const SNav = styled.nav`
@@ -20,18 +21,20 @@ const SLi = styled.li`
 `;
 const SA = styled.a` 
 text-decoration:none;
-padding:2px;
-margin:1px;
+padding:3px;
+margin:2px;
 box-shadow: 2px 3px 4px #777575;
+font-weight: 600;
+color: #000;
 border-bottom: solid 1px #000;
-font-size:1.2rem;
+font-size:1.3rem;
 `;
 
 
 
 
 
-const Pagination: React.FC<Indice> = ({ postsPerPage, totalPosts }) => {
+const Pagination: React.FC<Indice> = ({ postsPerPage, totalPosts, setPage }) => {
     const pageNumbers = [];
     console.log(">>>2>>>", postsPerPage, "<<<<<2<<<", totalPosts)
 
@@ -44,12 +47,14 @@ const Pagination: React.FC<Indice> = ({ postsPerPage, totalPosts }) => {
             <SUl >
                 {pageNumbers.map(number => (
                     <SLi key={number} >
-                        <SA href='!#' >
+                        <SA onClick={() => setPage(number)} href='!#' >
                             {number}
                         </SA>
+
                     </SLi>
                 ))}
             </SUl>
+
         </SNav>
     );
 };

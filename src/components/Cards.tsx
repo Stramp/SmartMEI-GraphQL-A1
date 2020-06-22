@@ -1,13 +1,25 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 export interface Post {
     title: string,
-    description: string
+    description: string,
+    id: string
 }
 
+const Grow = keyframes`
+from{
+    transform: scale(0,0);
+}to{
+    transform: scale(1,1);
+}
+`;
 
-const SCards = styled.div`
+
+const SCards: any = styled.div`
+    animation: ${Grow} 500ms;
+    animation-delay: ${props => ((Math.random() * 5) * 50)}ms;
+    animation-fill-mode:backwards;
     min-width: 250px;
     background:#fff;
     min-height: 100px;
@@ -25,12 +37,11 @@ const SCards = styled.div`
 
 
 
-const Cards = ({ title, description }: any) => {
-
+const Cards: React.FC<Post> = ({ title, description }) => {
     return (
         <SCards>
             <h3>{title}</h3>
-            <p>{description}</p>
+            <p>{description.slice(0, 140) + " ..."}</p>
         </SCards>
     )
 }

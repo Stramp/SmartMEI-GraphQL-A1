@@ -1,5 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
+
+import { ApolloProvider } from 'react-apollo';
+import aClient from './services/apollo'
+
 import Main from './components/Main';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -17,12 +21,14 @@ function App() {
 
 
   return (
-    <SApp>
-      <GlobalStyles />
-      <Header />
-      <Main />
-      <Footer />
-    </SApp>
+    <ApolloProvider client={aClient}>
+      <SApp>
+        <GlobalStyles />
+        <Header />
+        <Main />
+        <Footer />
+      </SApp>
+    </ApolloProvider>
   );
 }
 

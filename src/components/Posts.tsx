@@ -1,12 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Cards, { Post } from './Cards';
 import styled from 'styled-components';
 import Pagination from './Pagination';
 
 export interface Posts {
     posts: Post[],
-    loading: boolean,
-    postsPerPage: number,
+
 }
 
 
@@ -23,23 +22,33 @@ const SCards = styled.section`
     
 `;
 
-const Posts: React.FC<Posts> = ({ posts, loading, postsPerPage }) => {
-    if (loading) {
-        return <h2>Loading...</h2>;
-    }
+const Posts: React.FC<Posts> = ({ posts }) => {
+
+    const [currentPage, setCurrentPage] = useState(1);
+    const [postsPerPage] = useState(10);
+
+    const indexOfLastPost = currentPage * postsPerPage;
+    const indexOfFirstPost = indexOfLastPost - postsPerPage;
+    const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+
+    // Change page
+    const paginar = (pageNumber: number) => setCurrentPage(pageNumber);
+
+
 
     return (
         <>
             <SCards>
-                {posts.slice(0, postsPerPage).map((post: any) => (
+                {currentPosts.map((post: Post) => (
                     <Cards
                         key={post.id}
+                        id={post.id}
                         title={post.title}
                         description={post.description} />
                 ))}
 
             </SCards>
-            <Pagination postsPerPage={postsPerPage} totalPosts={posts.length} />
+            <Pagination postsPerPage={postsPerPage} totalPosts={posts.length} setPage={paginar} />
         </>
     );
 };
