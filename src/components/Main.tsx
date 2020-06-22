@@ -165,8 +165,7 @@ const arrPosts = [
 const Main = () => (
     <StyledMain>
         <h1>Vagas</h1>
-        <Posts posts={arrPosts} loading={false} postsPerPage="10" />
-
+        <Posts posts={arrPosts} loading={false} postsPerPage={10} />
     </StyledMain>
 )
 

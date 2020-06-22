@@ -1,6 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 
+export interface Post {
+    title: string,
+    description: string
+}
+
 
 const SCards = styled.div`
     min-width: 250px;
