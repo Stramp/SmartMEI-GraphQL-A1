@@ -3,6 +3,9 @@ import styled from 'styled-components';
 import { TypePost } from './Cards';
 import { useModal } from '../context/modalContext'
 
+import { useQuery } from "@apollo/react-hooks";
+import gql from 'graphql-tag';
+
 interface TypeModal {
     item: TypePost
 }
@@ -34,6 +37,19 @@ const SBox = styled.div`
 `;
 
 
+const jobInfo = gql`
+ query jobi($cs:String!, $s:String!) {
+        job(input:{
+            companySlug:$cs,
+            jobSlug:$s
+        }){
+            id title
+            company{
+            name
+            }
+        }
+}
+`;
 
 
 
@@ -42,14 +58,35 @@ const SBox = styled.div`
 
 const Modal: React.FC = () => {
     const { modalVisible, setModalVisible, modalItem } = useModal();
-    console.log(">>> modal boo >", modalItem)
-    const ModalEstructure: React.FC = () => (
-        <StyledModal onClick={() => setModalVisible(!modalVisible)}>
-            < SBox >
-                {modalItem.slug}
-            </SBox >
-        </StyledModal >
-    )
+
+
+
+    const ModalEstructure: React.FC = () => {
+        console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>", modalItem.company.slug);
+        console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>", modalItem.slug);
+
+
+
+        const { data, loading } = useQuery(jobInfo, {
+            variables: {
+
+                "cs": "close",
+                "s": "senior-software-engineer-backend"
+
+            }
+        });
+
+
+        console.log("******", data)
+        return (
+
+            <StyledModal onClick={() => setModalVisible(!modalVisible)}>
+                < SBox >
+                    {loading ? <h1>LOADING...</h1> : modalItem.slug}
+                </SBox >
+            </StyledModal >
+        )
+    }
 
     return (
         <>

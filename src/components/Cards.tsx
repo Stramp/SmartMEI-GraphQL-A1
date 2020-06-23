@@ -11,7 +11,8 @@ export interface TypePost {
     slug: string,
     tags: [{ name: string }],
     company: {
-        name: string
+        name: string,
+        slug: string
     }
 }
 
@@ -66,18 +67,17 @@ margin-bottom:10px;
 
 const Post: React.FC<TypePost> = ({ title, description, company, tags, slug }) => {
     const { modalVisible, setModalVisible, setModalItem } = useModal();
-    console.log('>>>>>>>))))##', slug);
 
-    function handClick(post: {}) {
+    function handClick() {
         setModalVisible(!modalVisible);
-        setModalItem(post);
-        console.log('click:>', post)
+        setModalItem({ company, slug });
+        console.log('click:>', { company, slug })
     }
 
     return (
         <>
 
-            <SCards onClick={() => handClick({ slug })}>
+            <SCards onClick={handClick}>
                 <SH3>{title}</SH3>
                 <SH5>{company.name}</SH5>
                 <SP>{description.slice(0, 140)} ...<b>Read More</b></SP>

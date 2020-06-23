@@ -26,6 +26,7 @@ const AllPosts = gql`
             id title slug description 
             company{
               name
+              slug
             }
             tags{
             name
@@ -38,8 +39,6 @@ const AllPosts = gql`
 
 const Main: React.FC = () => {
     const { data, loading } = useQuery(AllPosts);
-    console.log(loading)
-    console.log(data)
 
 
 

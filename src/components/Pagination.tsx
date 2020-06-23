@@ -45,7 +45,6 @@ transition: all 0.3s ease 0s;
 const Pagination: React.FC<Indice> = ({ postsPerPage, totalPosts, setPage, currentPage }) => {
     const [paginationInd, setPageInd] = useState(0);
     const pageNumbers = [];
-    console.log(">>>2>>>", postsPerPage, "<<<<<2<<<", totalPosts)
 
     for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
         pageNumbers.push(i);
@@ -57,7 +56,6 @@ const Pagination: React.FC<Indice> = ({ postsPerPage, totalPosts, setPage, curre
 
 
 
-    console.log(">>>>>>", currentPage, "<<<<<<<<")
 
     function handDownPageInd() {
         if (currentPage <= (indexOfFirstList + 2) && paginationInd >= 1) setPageInd(paginationInd - 1);
