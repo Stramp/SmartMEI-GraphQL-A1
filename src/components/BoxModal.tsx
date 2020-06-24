@@ -1,0 +1,169 @@
+import React from 'react';
+import styled, { keyframes } from 'styled-components';
+
+const Grow = keyframes`
+from{
+        transform: scale(0.9,0.9);
+    opacity:0.3;
+}to{
+        transform: scale(1,1);
+    opacity:1;
+}
+`
+
+const SBox = styled.div`
+
+background:#fff;
+border: 2px solid #0f0f0f;
+border-radius: 5px;
+width: 75vw;
+min-width: 400px;
+max-width: 900px;
+height: 60vh;
+display: flex;
+flex-direction:column;
+animation: ${ Grow} 500ms;
+animation-delay: ${ props => ((Math.random() * 5) * 50)} ms;
+animation-fill-mode: backwards;
+padding: 10px;
+box-shadow: 2px 3px 4px #777575;
+transition: all 0.3s ease 0s;
+@media(max-width: 438px) {
+    min-width: 80%;
+}
+
+`;
+const STitle = styled.h1`
+font-size: 1.4rem;
+padding-left: 10px;
+`;
+
+const SH5 = styled.h5`
+font-size: 1.2rem;
+padding-left: 10px;
+margin-top: 5px;
+margin-bottom: 10px;
+color:${props => props.color};
+`;
+
+const SP = styled.p`
+font-size: 1.2rem;
+margin-bottom: 10px;
+`;
+
+const SBtn = styled.a`
+    width:120px;
+    padding:5px;
+    margin:5px;
+    border: solid 1px #0f0f0f;
+    &&:hover{
+        cursor:pointer;
+        background:#00000091;
+    }
+`
+
+const TextBox = styled.div`
+    overflow:overlay;
+    height:85%;
+    padding:5px;
+    margin-bottom: 10px;
+`
+const ContainerData = styled.div`
+    display:flex;
+    height:100%;
+    padding:5px;
+`
+const ContainerDescription = styled.div`
+   height:100%;
+    width:55%;
+    margin:auto;
+`
+const ContainerNav = styled.div`
+    display:flex;
+    width:45%;
+    flex-direction:column;    
+    margin-left:25px;
+`
+const SNav = styled.nav`
+  text-align: center;
+`
+const Scode = styled.div`
+  font-family:'source-code-pro', 'Menlo', 'Monaco', 'Consolas', 'Courier New',
+    monospace;
+`
+const SubTitle = styled.div`
+  padding:5px;
+  margin-bottom: 25px;
+ 
+`
+
+
+
+interface TypeBoxModal {
+    job: {
+        title: string,
+        description: string,
+        postedAt: Date,
+        commitment: {
+            title: string
+        },
+        company: {
+            name: string,
+            websiteUrl: string
+        },
+        tags: {
+            name: string
+        }[]
+    }
+}
+
+
+const BoxModal: React.FC<TypeBoxModal> = ({ job }) => {
+    console.log('>>>>', job)
+    const dat = new Date(job.postedAt);
+
+    function handBtn(et: any) {
+        console.log('clicou em um botao do card qual ? >', et.target.type)
+    }
+    return (
+        <SBox>
+            <STitle>{job.title}</STitle>
+            <hr />
+            <ContainerData>
+
+                <ContainerDescription>
+
+                    <SH5 color="#777575">Description</SH5>
+                    <TextBox>
+                        <SP>{job.description} ...<b>Read More</b></SP>
+                    </TextBox>
+                    <Scode>{job.tags.map(tag => ' #' + tag.name.replace(' ', ''))}</Scode>
+
+                </ContainerDescription>
+                <ContainerNav>
+                    <SubTitle>
+                        <SH5 color="#777575">Company: </SH5>
+                        <SH5 color="#0f0f0f">{job.company.name}</SH5>
+                        <Scode color="#0f0f0f">{job.company.websiteUrl}</Scode>
+                    </SubTitle>
+                    <SubTitle>
+                        <SH5 color="#777575">Commitment: </SH5>
+                        <SH5 color="#0f0f0f">{job.commitment.title}</SH5>
+                    </SubTitle>
+                    <SubTitle>
+                        <SH5 color="#777575">Posted at: </SH5>
+                        <Scode>{dat.toUTCString()}</Scode>
+                    </SubTitle>
+
+
+                    <SNav>
+                        <SBtn type="subscribe" onClick={(et) => handBtn(et)}>Subscribe</SBtn>
+                        <SBtn type="unSubscribe" onClick={(et) => handBtn(et)}>UnSubscribe</SBtn>
+                    </SNav>
+                </ContainerNav>
+            </ContainerData>
+        </SBox>
+    )
+}
+
+export default BoxModal;
