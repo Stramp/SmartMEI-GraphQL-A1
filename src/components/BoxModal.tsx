@@ -1,5 +1,9 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
+import { useModal } from '../context/modalContext'
+import gql from 'graphql-tag';
+import { useMutation } from '@apollo/react-hooks';
+
 
 const Grow = keyframes`
 from{
@@ -37,7 +41,6 @@ const STitle = styled.h1`
 font-size: 1.4rem;
 padding-left: 10px;
 `;
-
 const SH5 = styled.h5`
 font-size: 1.2rem;
 padding-left: 10px;
@@ -45,12 +48,17 @@ margin-top: 5px;
 margin-bottom: 10px;
 color:${props => props.color};
 `;
-
+const Subscribe = styled.h4`
+font-size: 1.2rem;
+padding-left: 10px;
+margin-top: 25px;
+margin-bottom: 10px;
+color:${props => props.color};
+`;
 const SP = styled.p`
 font-size: 1.2rem;
 margin-bottom: 10px;
 `;
-
 const SBtn = styled.a`
     width:120px;
     padding:5px;
@@ -61,11 +69,10 @@ const SBtn = styled.a`
         background:#00000091;
     }
 `
-
 const TextBox = styled.div`
     overflow:overlay;
     height:85%;
-    padding:5px;
+    padding:5px 25px 5px 5px;
     margin-bottom: 10px;
 `
 const ContainerData = styled.div`
@@ -97,7 +104,12 @@ const SubTitle = styled.div`
  
 `
 
-
+const bd = {
+    user: {
+        name: "rafael",
+        email: "rafaelcostart2@gmail.com"
+    }
+}
 
 interface TypeBoxModal {
     job: {
@@ -117,13 +129,30 @@ interface TypeBoxModal {
     }
 }
 
+const MutationSub = gql`
+    mutation Subscriber($name:String!, $email:String!){
+        subscribe(input:{name:$name, email: $email}){
+            subscribe 
+        }
+    }
+`
 
 const BoxModal: React.FC<TypeBoxModal> = ({ job }) => {
-    console.log('>>>>', job)
+    const { modalVisible, setModalVisible } = useModal();
+    const [reqSubs, { data, loading }] = useMutation(MutationSub);
+    console.log('>data>>>', Boolean(data) ? data.subscribe.subscribe : "nada")
     const dat = new Date(job.postedAt);
 
-    function handBtn(et: any) {
-        console.log('clicou em um botao do card qual ? >', et.target.type)
+    function handBtn() {
+
+        reqSubs({
+            variables: {
+
+                "name": bd.user.name,
+                "email": bd.user.email
+
+            }
+        })
     }
     return (
         <SBox>
@@ -135,7 +164,7 @@ const BoxModal: React.FC<TypeBoxModal> = ({ job }) => {
 
                     <SH5 color="#777575">Description</SH5>
                     <TextBox>
-                        <SP>{job.description} ...<b>Read More</b></SP>
+                        <SP>{job.description}</SP>
                     </TextBox>
                     <Scode>{job.tags.map(tag => ' #' + tag.name.replace(' ', ''))}</Scode>
 
@@ -157,8 +186,9 @@ const BoxModal: React.FC<TypeBoxModal> = ({ job }) => {
 
 
                     <SNav>
-                        <SBtn type="subscribe" onClick={(et) => handBtn(et)}>Subscribe</SBtn>
-                        <SBtn type="unSubscribe" onClick={(et) => handBtn(et)}>UnSubscribe</SBtn>
+                        <SBtn type="subscribe" onClick={handBtn}>{!loading ? 'Subscribe' : 'Loading'}</SBtn>
+                        <SBtn type="close" onClick={() => setModalVisible(!modalVisible)}>Close</SBtn>
+                        <Subscribe color="#0f0f0f">{Boolean(data) ? data.subscribe.subscribe ? 'Successfully Subscribe' : 'Not subscribed' : null}</Subscribe>
                     </SNav>
                 </ContainerNav>
             </ContainerData>

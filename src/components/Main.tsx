@@ -16,6 +16,7 @@ const StyledMain = styled.main`
     height: 100%;
     flex-direction:column;
     margin:15px;
+    
 `;
 
 
@@ -40,9 +41,10 @@ const AllPosts = gql`
 const Main: React.FC = () => {
     const { data, loading } = useQuery(AllPosts);
 
+    console.log("mais>>", loading, data)
+    console.log("mais>>", loading, !Boolean(data))
 
-
-    if (loading) {
+    if (loading && !Boolean(data)) {
         return <h2>Loading...</h2>;
     }
 

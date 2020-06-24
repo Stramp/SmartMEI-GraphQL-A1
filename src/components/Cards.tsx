@@ -33,7 +33,7 @@ const SCards: any = styled.div`
     animation-fill-mode:backwards;
     min-width: 250px;
     background:#fff;
-    min-height: 100px;
+    min-height: 125px;
     border-bottom: solid 1px #000;
     padding: 10px;
     box-shadow: 2px 3px 4px #777575;
