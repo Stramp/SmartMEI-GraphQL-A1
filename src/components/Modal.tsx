@@ -7,8 +7,9 @@ import Box from './BoxModal';
 import { useQuery } from "@apollo/react-hooks";
 import gql from 'graphql-tag';
 
+import ImgLoadingWhite from '../assets/loading_white.svg'
 interface TypeModal {
-    item: TypePost
+  item: TypePost
 }
 
 const StyledModal = styled.div`
@@ -32,8 +33,16 @@ const HitBox = styled.div`
     height: 100%;
     z-index: -1;
 `
-
-
+const SImg = styled.img`
+    max-width: 100%;
+`;
+const SH1 = styled.h1`
+font-size: 1.2rem;
+padding-left: 10px;
+margin-top: 5px;
+margin-bottom: 10px;
+color:#fff;
+`;
 
 const jobInfo = gql`
 query jobI($companySlug:String!, $jobSlug:String!){
@@ -63,35 +72,35 @@ query jobI($companySlug:String!, $jobSlug:String!){
 
 
 const Modal: React.FC = () => {
-    const { modalVisible, setModalVisible, modalItem } = useModal();
+  const { modalVisible, setModalVisible, modalItem } = useModal();
 
-    const ModalEstructure: React.FC = () => {
+  const ModalEstructure: React.FC = () => {
 
-        const { data, loading } = useQuery(jobInfo, {
-            variables: {
+    const { data, loading } = useQuery(jobInfo, {
+      variables: {
 
-                "companySlug": modalItem.company.slug,
-                "jobSlug": modalItem.slug
+        "companySlug": modalItem.company.slug,
+        "jobSlug": modalItem.slug
 
-            }
-        });
-        console.log('data > ', !loading ? data : 'veio nada');
-        console.table(!loading ? data.job : 'veio nada');
-        return (
-
-            <StyledModal>
-
-                {loading ? <h1>LOADING...</h1> : <Box job={data.job} />}
-                <HitBox onClick={() => setModalVisible(!modalVisible)} />
-            </StyledModal >
-        )
-    }
+      }
+    });
+    console.log('data > ', !loading ? data : 'error');
 
     return (
-        <>
-            {modalVisible ? <ModalEstructure /> : null}
-        </>
+
+      <StyledModal>
+
+        {loading ? <div><SImg src={ImgLoadingWhite} /><SH1>LOADING...</SH1></div> : <Box job={data.job} />}
+        <HitBox onClick={() => setModalVisible(!modalVisible)} />
+      </StyledModal >
     )
+  }
+
+  return (
+    <>
+      {modalVisible ? <ModalEstructure /> : null}
+    </>
+  )
 }
 
 export default Modal;

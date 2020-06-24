@@ -71,19 +71,15 @@ const Post: React.FC<TypePost> = ({ title, description, company, tags, slug }) =
     function handClick() {
         setModalVisible(!modalVisible);
         setModalItem({ company, slug });
-        console.log('click:>', { company, slug })
     }
 
     return (
-        <>
-
-            <SCards onClick={handClick}>
-                <SH3>{title}</SH3>
-                <SH5>{company.name}</SH5>
-                <SP>{description.slice(0, 140)} ...<b>Read More</b></SP>
-                <code>{tags.map(tag => ' #' + tag.name.replace(' ', ''))}</code>
-            </SCards>
-        </>
+        <SCards onClick={handClick}>
+            <SH3>{title}</SH3>
+            <SH5>{company.name}</SH5>
+            <SP>{description.slice(0, 140)} ...<b>Read More</b></SP>
+            <code>{tags.map(tag => ' #' + tag.name.replace(' ', ''))}</code>
+        </SCards>
     )
 }
 

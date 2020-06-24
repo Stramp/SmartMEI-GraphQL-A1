@@ -6,6 +6,14 @@ import gql from 'graphql-tag';
 import styled from 'styled-components';
 import Posts from './Posts';
 
+import ImgLoading from '../assets/loading.svg'
+
+
+
+const SImg = styled.img`
+    max-width: 100%;
+`;
+
 
 const StyledMain = styled.main`
     width: 90%;
@@ -18,6 +26,7 @@ const StyledMain = styled.main`
     margin:15px;
     
 `;
+
 
 
 const AllPosts = gql`
@@ -41,11 +50,15 @@ const AllPosts = gql`
 const Main: React.FC = () => {
     const { data, loading } = useQuery(AllPosts);
 
-    console.log("mais>>", loading, data)
-    console.log("mais>>", loading, !Boolean(data))
+    console.log("Query AllPosts >>", loading, data)
 
     if (loading && !Boolean(data)) {
-        return <h2>Loading...</h2>;
+        return (
+            <div>
+                <SImg src={ImgLoading} />
+                <h2>Loading...</h2>
+            </div>
+        )
     }
 
     return (

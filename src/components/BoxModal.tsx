@@ -140,17 +140,14 @@ const MutationSub = gql`
 const BoxModal: React.FC<TypeBoxModal> = ({ job }) => {
     const { modalVisible, setModalVisible } = useModal();
     const [reqSubs, { data, loading }] = useMutation(MutationSub);
-    console.log('>data>>>', Boolean(data) ? data.subscribe.subscribe : "nada")
+    console.log('Status Subscribe>', Boolean(data) ? data.subscribe.subscribe : "error")
     const dat = new Date(job.postedAt);
 
     function handBtn() {
-
         reqSubs({
             variables: {
-
                 "name": bd.user.name,
                 "email": bd.user.email
-
             }
         })
     }

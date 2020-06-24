@@ -21,7 +21,7 @@ const SImg = styled.img`
 `;
 
 
-const Header = () => {
+const Header: React.FC = () => {
     return (
         <StyledHeader>
             <SImg src={logo} />

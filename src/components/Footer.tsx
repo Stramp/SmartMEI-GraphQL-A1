@@ -28,7 +28,6 @@ const SP = styled.p`
 const Footer = () => (
     <StyledFooter>
         <SP>SmartMEI 2020 Todos direitos reservados</SP>
-
     </StyledFooter>
 )
 
