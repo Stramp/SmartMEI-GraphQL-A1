@@ -26,14 +26,6 @@ Para fazer as query eu utilizei o _graphql-tags_ e para manipula-las e fazer as 
 
 Lendo o teste vi q eu deveria fazer uma _mutation_ para se candidatar a vaga, tal mutation q solicitava nome e email do usuario, nas especificações dizia q nao precisava da pagina de login. Entao criei somente um Obj BD com user.name e user.email para simular. Essas variaveis viriam atraves do login do usuario.
 
-## A2
-#### Sobre o teste
-
-#### Estrutura
-
-#### Mecanica
-
-#### GraphQL
 
 
 
