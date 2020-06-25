@@ -71,14 +71,14 @@ const Pagination: React.FC<Indice> = ({ postsPerPage, totalPosts, setPage, curre
             <SUl >
                 {currentPage <= 1 ? null :
                     <SLi>
-                        <SA onClick={handDownPageInd} href='!#'> {'<<'} </SA>
+                        <SA onClick={handDownPageInd} > {'<<'} </SA>
                         {paginationInd > 0 ? <span>...</span> : null}
                     </SLi>
                 }
 
                 {currentList.map(number => (
                     <SLi key={number} >
-                        <SA onClick={(e) => setPage(number)} href='!#' tabIndex={currentPage} >
+                        <SA onClick={(e) => setPage(number)} tabIndex={currentPage} >
                             {number}
                         </SA>
                     </SLi>
@@ -88,13 +88,13 @@ const Pagination: React.FC<Indice> = ({ postsPerPage, totalPosts, setPage, curre
                 {pageNumbers.length === currentPage ? null :
                     <SLi>
                         {pageNumbers.length >= indexOfLastList ? <span>...</span> : null}
-                        <SA onClick={handUpPageInd} href='!#'> {'>>'} </SA>
+                        <SA onClick={handUpPageInd} > {'>>'} </SA>
                     </SLi>
                 }
 
             </SUl>
 
-        </SNav>
+        </SNav >
     );
 };
 
